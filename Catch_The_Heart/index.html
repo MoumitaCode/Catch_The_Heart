@@ -142,3 +142,23 @@
         startButton.addEventListener('click', () => {
             startGame();
         });
+        function startGame() {
+            startButton.style.display = 'none';
+            heart.style.display = 'block';
+            moveHeart();
+            setInterval(moveHeart, 1000);
+        }
+
+        playAgainButton.addEventListener('click', () => {
+            playAgain();
+        });
+
+        function playAgain() {
+            playAgainButton.style.display = 'none';
+            heart.style.display = 'block';
+            moveHeart();
+            setInterval(moveHeart, 1000);
+        }
+    </script>
+</body>
+</html>
