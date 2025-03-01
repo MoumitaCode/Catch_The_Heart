@@ -92,10 +92,53 @@
         .play-again {
             display: none; 
         }
-        
+
     </style>
 </head>
 <body>
     <button class="start-button" id="start-button">Start the Game!</button>
     <div class="heart" id="heart" style="display: none;"></div>
     <button class="play-again" id="play-again">Play Again!</button>
+<script>
+        const heart = document.getElementById('heart');
+        const startButton = document.getElementById('start-button');
+        const playAgainButton = document.getElementById('play-again');
+        let fireworkInterval;
+
+        function moveHeart() {
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+        }
+
+        heart.addEventListener('click', () => {
+            createFireworks();
+            alert('You caught the heart! 💖');
+            heart.style.display = 'none';
+            playAgainButton.style.display = 'block';
+            clearInterval(fireworkInterval);
+        });
+        function createFireworks() {
+            const fireworkCount = 50; 
+            for (let i = 0; i < fireworkCount; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                document.body.appendChild(firework);
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                firework.style.left = `${x}px`;
+                firework.style.top = `${y}px`;
+                firework.style.animationDuration = `${Math.random() * 2 + 1}s`; 
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000); 
+            }
+            setTimeout(() => {
+                createFireworks();
+            }, 500);
+        }
+
+        startButton.addEventListener('click', () => {
+            startGame();
+        });
